@@ -163,13 +163,13 @@ void calcular() {
     int i;
     float tiempoTotal = 0;
     float recursosTotal = 0;
-    float *pt = tiempos;   /* uso de punteros */
-    float *pr = recursos;
+    float *pt = &tiempoTotal;
+    float *pr = &recursosTotal;
 
     for (i = 0; i < total; i++) {
         if (eliminado[i] == 0) {
-            tiempoTotal   = tiempoTotal   + (*(pt + i) * cantidades[i]);
-            recursosTotal = recursosTotal + (*(pr + i) * cantidades[i]);
+            *pt = *pt + (tiempos[i] * cantidades[i]);
+            *pr = *pr + (recursos[i] * cantidades[i]);
         }
     }
 
