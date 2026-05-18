@@ -18,12 +18,12 @@ int buscar(char nombre[]) {
     return -1;
 }
 
-void ingresar() {
+int ingresar() {
     int n, i;
 
     if (total >= 5) {
         printf("No hay espacio para mas productos.\n");
-        return;
+        return 0;
     }
 
     printf("Cuantos productos quiere ingresar? ");
@@ -50,9 +50,10 @@ void ingresar() {
 
     total = total + n;
     printf("Productos ingresados.\n");
+    return 0;
 }
 
-void mostrar() {
+int mostrar() {
     int i;
     printf("\nLista de productos:\n");
     for (i = 0; i < total; i++) {
@@ -61,9 +62,10 @@ void mostrar() {
                 nombres[i], tiempos[i], recursos[i], cantidades[i]);
         }
     }
+    return 0;
 }
 
-void editar() {
+int editar() {
     char nombre[50];
     int indice, opcion;
 
@@ -75,7 +77,7 @@ void editar() {
 
     if (indice == -1) {
         printf("Producto no encontrado.\n");
-        return;
+        return 0;
     }
 
     printf("1. Nombre\n2. Tiempo\n3. Recursos\n4. Cantidad\n");
@@ -102,9 +104,10 @@ void editar() {
     }
 
     printf("Producto editado.\n");
+    return 0;
 }
 
-void eliminar() {
+int eliminar() {
     char nombre[50];
     int indice;
     char confirmar;
@@ -117,7 +120,7 @@ void eliminar() {
 
     if (indice == -1) {
         printf("Producto no encontrado.\n");
-        return;
+        return 0;
     }
 
     printf("Esta seguro? (s/n): ");
@@ -128,9 +131,11 @@ void eliminar() {
         eliminado[indice] = 1;
         printf("Producto eliminado.\n");
     }
+
+    return 0;
 }
 
-void calcular() {
+int calcular() {
     int i;
     float tiempoTotal = 0;
     float recursosTotal = 0;
@@ -146,9 +151,10 @@ void calcular() {
 
     printf("Tiempo total: %.2f horas\n", tiempoTotal);
     printf("Recursos totales: %.2f\n", recursosTotal);
+    return 0;
 }
 
-void verificar() {
+int verificar() {
     int i;
     float tiempoTotal = 0;
     float recursosTotal = 0;
@@ -178,6 +184,8 @@ void verificar() {
             printf("Le faltan %.2f recursos.\n", recursosTotal - recursosDisp);
         }
     }
+
+    return 0;
 }
 
 int main() {
