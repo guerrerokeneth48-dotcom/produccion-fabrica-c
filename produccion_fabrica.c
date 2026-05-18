@@ -41,14 +41,10 @@ int ingresar() {
 
     printf("Cuantos productos quiere ingresar? ");
     scanf("%d", &n);
-    getchar();
 
     for (i = total; i < total + n; i++) {
         printf("Nombre del producto %d: ", i + 1);
-        fgets(nombres[i], 50, stdin);
-        int j = 0;
-        while (nombres[i][j] != '\n' && nombres[i][j] != '\0') j = j + 1;
-        nombres[i][j] = '\0';
+        scanf("%s", nombres[i]);
 
         printf("Tiempo de fabricacion por unidad (horas): ");
         scanf("%f", &tiempos[i]);
@@ -58,7 +54,6 @@ int ingresar() {
 
         printf("Cantidad demandada: ");
         scanf("%d", &cantidades[i]);
-        getchar();
 
         eliminado[i] = 0;
     }
@@ -85,10 +80,7 @@ int editar() {
     int indice, opcion;
 
     printf("Nombre del producto a editar: ");
-    fgets(nombre, 50, stdin);
-    int j = 0;
-    while (nombre[j] != '\n' && nombre[j] != '\0') j = j + 1;
-    nombre[j] = '\0';
+    scanf("%s", nombre);
 
     indice = buscar(nombre);
 
@@ -100,26 +92,19 @@ int editar() {
     printf("1. Nombre\n2. Tiempo\n3. Recursos\n4. Cantidad\n");
     printf("Que desea editar? ");
     scanf("%d", &opcion);
-    getchar();
 
     if (opcion == 1) {
         printf("Nuevo nombre: ");
-        fgets(nombres[indice], 50, stdin);
-        int k = 0;
-        while (nombres[indice][k] != '\n' && nombres[indice][k] != '\0') k = k + 1;
-        nombres[indice][k] = '\0';
+        scanf("%s", nombres[indice]);
     } else if (opcion == 2) {
         printf("Nuevo tiempo: ");
         scanf("%f", &tiempos[indice]);
-        getchar();
     } else if (opcion == 3) {
         printf("Nuevos recursos: ");
         scanf("%f", &recursos[indice]);
-        getchar();
     } else if (opcion == 4) {
         printf("Nueva cantidad: ");
         scanf("%d", &cantidades[indice]);
-        getchar();
     }
 
     printf("Producto editado.\n");
@@ -132,10 +117,7 @@ int eliminar() {
     char confirmar;
 
     printf("Nombre del producto a eliminar: ");
-    fgets(nombre, 50, stdin);
-    int j = 0;
-    while (nombre[j] != '\n' && nombre[j] != '\0') j = j + 1;
-    nombre[j] = '\0';
+    scanf("%s", nombre);
 
     indice = buscar(nombre);
 
@@ -145,8 +127,7 @@ int eliminar() {
     }
 
     printf("Esta seguro? (s/n): ");
-    scanf("%c", &confirmar);
-    getchar();
+    scanf(" %c", &confirmar);
 
     if (confirmar == 's') {
         eliminado[indice] = 1;
@@ -192,7 +173,6 @@ int verificar() {
     scanf("%f", &tiempoDisp);
     printf("Recursos disponibles: ");
     scanf("%f", &recursosDisp);
-    getchar();
 
     if (tiempoTotal <= tiempoDisp && recursosTotal <= recursosDisp) {
         printf("La fabrica SI puede cumplir con la demanda.\n");
@@ -227,7 +207,6 @@ int main() {
         printf("0. Salir\n");
         printf("Opcion: ");
         scanf("%d", &opcion);
-        getchar();
 
         if (opcion == 1) ingresar();
         else if (opcion == 2) mostrar();
