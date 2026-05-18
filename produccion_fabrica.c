@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 
 char nombres[5][50];
 float tiempos[5];
@@ -8,10 +7,24 @@ int cantidades[5];
 int eliminado[5];
 int total = 0;
 
+int comparar(char a[], char b[]) {
+    int i = 0;
+    while (a[i] != '\0' && b[i] != '\0') {
+        if (a[i] != b[i]) {
+            return 0;
+        }
+        i = i + 1;
+    }
+    if (a[i] == '\0' && b[i] == '\0') {
+        return 1;
+    }
+    return 0;
+}
+
 int buscar(char nombre[]) {
     int i;
     for (i = 0; i < total; i++) {
-        if (eliminado[i] == 0 && strcmp(nombres[i], nombre) == 0) {
+        if (eliminado[i] == 0 && comparar(nombres[i], nombre) == 1) {
             return i;
         }
     }
@@ -33,7 +46,9 @@ int ingresar() {
     for (i = total; i < total + n; i++) {
         printf("Nombre del producto %d: ", i + 1);
         fgets(nombres[i], 50, stdin);
-        nombres[i][strlen(nombres[i]) - 1] = '\0';
+        int j = 0;
+        while (nombres[i][j] != '\n' && nombres[i][j] != '\0') j = j + 1;
+        nombres[i][j] = '\0';
 
         printf("Tiempo de fabricacion por unidad (horas): ");
         scanf("%f", &tiempos[i]);
@@ -71,7 +86,9 @@ int editar() {
 
     printf("Nombre del producto a editar: ");
     fgets(nombre, 50, stdin);
-    nombre[strlen(nombre) - 1] = '\0';
+    int j = 0;
+    while (nombre[j] != '\n' && nombre[j] != '\0') j = j + 1;
+    nombre[j] = '\0';
 
     indice = buscar(nombre);
 
@@ -88,7 +105,9 @@ int editar() {
     if (opcion == 1) {
         printf("Nuevo nombre: ");
         fgets(nombres[indice], 50, stdin);
-        nombres[indice][strlen(nombres[indice]) - 1] = '\0';
+        int k = 0;
+        while (nombres[indice][k] != '\n' && nombres[indice][k] != '\0') k = k + 1;
+        nombres[indice][k] = '\0';
     } else if (opcion == 2) {
         printf("Nuevo tiempo: ");
         scanf("%f", &tiempos[indice]);
@@ -114,7 +133,9 @@ int eliminar() {
 
     printf("Nombre del producto a eliminar: ");
     fgets(nombre, 50, stdin);
-    nombre[strlen(nombre) - 1] = '\0';
+    int j = 0;
+    while (nombre[j] != '\n' && nombre[j] != '\0') j = j + 1;
+    nombre[j] = '\0';
 
     indice = buscar(nombre);
 
